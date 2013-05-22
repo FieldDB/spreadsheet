@@ -639,8 +639,6 @@ define(
                       break;
                     }
                   }
-                  console.log("TEST");
-                  console.log($scope.data[i]);
                 }
               }
             }
