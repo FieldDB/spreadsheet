@@ -4,14 +4,14 @@ console.log("Loading the Spreadsheet main");
 require.config({
 	paths : {
 		/* Twitter Bootstrap javascript files */
-		"bootstrap" : "../libs/bootstrap/js/bootstrap",
+		"bootstrap" : "libs/bootstrap/js/bootstrap",
 
 		/* jQuery */
-		"jquery" : "../libs/jquery",
+		"jquery" : "libs/jquery",
 
 		/* AngularJS */
-		"angular" : "../libs/angular/angular",
-		"angular-resource" : "../libs/angular/angular-resource",
+		"angular" : "libs/angular/angular",
+		"angular-resource" : "libs/angular/angular-resource"
 	},
 	shim : {
 		"jquery" : {
@@ -35,7 +35,7 @@ require.config({
  * Declare only the variables that are needed here, the dependencies of the rest
  * will be discovered and loaded as needed by require.js
  */
-require([ "bootstrap", "angular-resource", "../js/module" ],
+require([ "bootstrap", "angular-resource", "js/module.js" ],
 		function($, angular) {
 	console.log("Initializing the Spreadsheet page.");
 

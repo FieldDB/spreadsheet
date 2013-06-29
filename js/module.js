@@ -1,9 +1,9 @@
 console.log("Loading the Spreadsheet module.");
 
 'use strict';
-define([ "angular", "js/controllers/SpreadsheetStyleDataEntryController", "js/controllers/SpreadsheetStyleDataEntrySettingsController",
-		"js/directives/SpreadsheetStyleDataEntryDirectives", "js/filters/SpreadsheetStyleDataEntryFilters",
-		"js/services/SpreadsheetStyleDataEntryServices", "js/controllers/SandboxController" ], function(angular, SpreadsheetStyleDataEntryController, SpreadsheetStyleDataEntrySettingsController,
+define([ "angular", "js/controllers/SpreadsheetController", "js/controllers/SettingsController",
+		"js/directives", "js/filters",
+		"js/services", "js/controllers/SandboxController" ], function(angular, SpreadsheetStyleDataEntryController, SpreadsheetStyleDataEntrySettingsController,
 				SpreadsheetStyleDataEntryDirectives, SpreadsheetStyleDataEntryFilters, SpreadsheetStyleDataEntryServices, SandboxController) {
 	/**
 	 * The main Spreadsheet Angular UI module.
