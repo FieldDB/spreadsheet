@@ -1,35 +1,35 @@
-console.log("Loading the LingSync Spreadsheet module.");
+console.log("Loading the Spreadsheet module.");
 
 'use strict';
-define([ "angular", "js/controllers/LingSyncSpreadsheetController", "js/controllers/LingSyncSpreadsheetSettingsController",
-		"js/directives/LingSyncSpreadsheetDirectives", "js/filters/LingSyncSpreadsheetFilters",
-		"js/services/LingSyncSpreadsheetServices", "js/controllers/SandboxController" ], function(angular, LingSyncSpreadsheetController, LingSyncSpreadsheetSettingsController,
-				LingSyncSpreadsheetDirectives, LingSyncSpreadsheetFilters, LingSyncSpreadsheetServices, SandboxController) {
+define([ "angular", "js/controllers/SpreadsheetStyleDataEntryController", "js/controllers/SpreadsheetStyleDataEntrySettingsController",
+		"js/directives/SpreadsheetStyleDataEntryDirectives", "js/filters/SpreadsheetStyleDataEntryFilters",
+		"js/services/SpreadsheetStyleDataEntryServices", "js/controllers/SandboxController" ], function(angular, SpreadsheetStyleDataEntryController, SpreadsheetStyleDataEntrySettingsController,
+				SpreadsheetStyleDataEntryDirectives, SpreadsheetStyleDataEntryFilters, SpreadsheetStyleDataEntryServices, SandboxController) {
 	/**
-	 * The main LingSync Angular UI module.
+	 * The main Spreadsheet Angular UI module.
 	 * 
 	 * @type {angular.Module}
 	 */
 
-	var LingSyncSpreadsheet = angular.module('LingSyncSpreadsheet',
-			[ 'LingSyncSpreadsheet.services', 'LingSyncSpreadsheet.directives', 'LingSyncSpreadsheet.filters' ]).config(
+	var SpreadsheetStyleDataEntry = angular.module('SpreadsheetStyleDataEntry',
+			[ 'SpreadsheetStyleDataEntry.services', 'SpreadsheetStyleDataEntry.directives', 'SpreadsheetStyleDataEntry.filters' ]).config(
 			[ '$routeProvider', function($routeProvider) {
-				window.LingSyncSpreadsheetController = LingSyncSpreadsheetController;
-				console.log("Initializing the LingSync Spreadsheet module.");
-				$routeProvider.when('/lingsync_spreadsheet', {
+				window.SpreadsheetStyleDataEntryController = SpreadsheetStyleDataEntryController;
+				console.log("Initializing the Spreadsheet module.");
+				$routeProvider.when('/spreadsheet_main', {
 					templateUrl : 'partials/main.html',
 				}).when('/settings', {
 					templateUrl : 'partials/settings.html',
-					controller : LingSyncSpreadsheetSettingsController
+					controller : SpreadsheetStyleDataEntrySettingsController
 				}).when('/sandbox', {
 					templateUrl : 'partials/sandbox.html', controller: SandboxController,
-				}).when('/lingsync/template1', {
+				}).when('/spreadsheet/template1', {
 					templateUrl : 'partials/template1.html',
-				}).when('/lingsync/template2', {
+				}).when('/spreadsheet/template2', {
 					templateUrl : 'partials/template2.html',
 				}).otherwise({
-					redirectTo : '/lingsync_spreadsheet'
+					redirectTo : '/spreadsheet_main'
 				});
 			} ]);
-	return LingSyncSpreadsheet;
+	return SpreadsheetStyleDataEntry;
 });

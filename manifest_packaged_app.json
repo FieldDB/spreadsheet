@@ -1,6 +1,6 @@
 {
   "name": "LingSync Spreadsheet Packaged App",
-  "description": "Streamlined data entry for LingSync app.",
+  "description": "Spreadsheet style data entry.",
   "version": "1.0",
   "manifest_version" : 2,
   "app": {

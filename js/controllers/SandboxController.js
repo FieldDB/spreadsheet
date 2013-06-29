@@ -5,7 +5,7 @@ define(
     [ "angular" ],
     function(angular) {
       var SandboxController = function($scope, $rootScope, $resource,
-          LingSyncData) {
+          Data) {
 
         $scope.data = getData();
         $scope.data.sort(function(a, b) {
@@ -490,7 +490,7 @@ define(
         // Return fake data
         function getData() {
           // TODO GET REAL DATA, WRITE MAP-REDUCE FUNCTIONS
-          LingSyncData.async($rootScope.DB).then(function(dataFromServer) {
+          Data.async($rootScope.DB).then(function(dataFromServer) {
             console.log("TODO get real data.");
           });
 
@@ -548,6 +548,6 @@ define(
 
       };
       SandboxController.$inject = [ '$scope', '$rootScope', '$resource',
-          'LingSyncData' ];
+          'Data' ];
       return SandboxController;
     });

@@ -1,13 +1,13 @@
-console.log("Loading the LingSyncSpreadsheetServices.");
+console.log("Loading the SpreadsheetStyleDataEntryServices.");
 
 'use strict';
 define(
     [ "angular" ],
     function(angular) {
-      var LingSyncSpreadsheetServices = angular
-          .module('LingSyncSpreadsheet.services', [ 'ngResource' ])
+      var SpreadsheetStyleDataEntryServices = angular
+          .module('SpreadsheetStyleDataEntry.services', [ 'ngResource' ])
           .factory(
-              'LingSyncData',
+              'Data',
               function($http, $rootScope) {
                 return {
                   'async' : function(DB, UUID) {
@@ -21,10 +21,10 @@ define(
                       };
 
                       console
-                          .log("Contacting the DB to get LingSync record data "
+                          .log("Contacting the DB to get   record data "
                               + couchInfo);
                       var promise = $http(config).then(function(response) {
-                        console.log("Receiving LingSync data results ");
+                        console.log("Receiving   data results ");
                         return response.data;
                       });
                       return promise;
@@ -39,10 +39,10 @@ define(
                         withCredentials : true
                       };
                       console
-                          .log("Contacting the DB to get all LingSync corpus data for "
+                          .log("Contacting the DB to get all   corpus data for "
                               + DB);
                       var promise = $http(config).then(function(response) {
-                        console.log("Receiving LingSync data results ");
+                        console.log("Receiving   data results ");
                         return response.data.rows;
                       });
                       return promise;
@@ -59,10 +59,10 @@ define(
                     };
 
                     console
-                        .log("Contacting the DB to get LingSync datum fields for "
+                        .log("Contacting the DB to get   datum fields for "
                             + couchInfo);
                     var promise = $http(config).then(function(response) {
-                      console.log("Receiving LingSync datum fields ");
+                      console.log("Receiving   datum fields ");
                       return response.data.rows;
                     });
                     return promise;
@@ -169,5 +169,5 @@ define(
                   }
                 };
               });
-      return LingSyncSpreadsheetServices;
+      return SpreadsheetStyleDataEntryServices;
     });

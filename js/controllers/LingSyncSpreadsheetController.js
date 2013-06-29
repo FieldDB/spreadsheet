@@ -1,17 +1,17 @@
-console.log("Loading the LingSyncSpreadsheetController.");
+console.log("Loading the SpreadsheetStyleDataEntryController.");
 
 'use strict';
 define(
     [ "angular" ],
     function(angular) {
-      var LingSyncSpreadsheetController = /**
+      var SpreadsheetStyleDataEntryController = /**
                                            * @param $scope
                                            * @param $rootScope
                                            * @param $resource
-                                           * @param LingSyncData
-                                           * @returns {LingSyncSpreadsheetController}
+                                           * @param Data
+                                           * @returns {SpreadsheetStyleDataEntryController}
                                            */
-      function($scope, $rootScope, $resource, $filter, LingSyncData) {
+      function($scope, $rootScope, $resource, $filter, Data) {
         
         //TEST FOR CHROME BROWSER
         var is_chrome = window.chrome;
@@ -19,9 +19,9 @@ define(
          $scope.not_chrome = true; 
         }
         
-        var LingSyncPreferences = localStorage.getItem('LingSyncPreferences');
-        if (LingSyncPreferences == undefined) {
-          LingSyncPreferences = {
+        var Preferences = localStorage.getItem('Preferences');
+        if (Preferences == undefined) {
+          Preferences = {
             "userTemplate" : "template2",
             "resultSize" : 5,
             "availableFields" : {
@@ -147,18 +147,18 @@ define(
               }
             }
           };
-          localStorage.setItem('LingSyncPreferences', JSON
-              .stringify(LingSyncPreferences));
+          localStorage.setItem('Preferences', JSON
+              .stringify(Preferences));
           console.log("Setting default preferences in localStorage.");
         } else {
-          console.log("Loading LingSyncPreferences from localStorage.");
-          LingSyncPreferences = JSON.parse(LingSyncPreferences);
+          console.log("Loading Preferences from localStorage.");
+          Preferences = JSON.parse(Preferences);
         }
 
         // Set scope variables
-        $rootScope.template = LingSyncPreferences.userTemplate;
-        $rootScope.fields = LingSyncPreferences[LingSyncPreferences.userTemplate];
-        $scope.scopePreferences = LingSyncPreferences;
+        $rootScope.template = Preferences.userTemplate;
+        $rootScope.fields = Preferences[Preferences.userTemplate];
+        $scope.scopePreferences = Preferences;
         $scope.orderProp = "dateModified";
         $scope.reverse = true;
         $scope.selected = 'newEntry';
@@ -174,7 +174,7 @@ define(
         $scope.currentDate = new Date().toDateString();
 
         // Set data size for pagination
-        $rootScope.resultSize = LingSyncPreferences.resultSize;
+        $rootScope.resultSize = Preferences.resultSize;
 
         $scope.changeActiveSubMenu = function(subMenu) {
           if ($rootScope.activeSubMenu == subMenu) {
@@ -217,7 +217,7 @@ define(
               $scope.searchHistory = null;
               $scope.search = false;
               $scope.changeActiveSubMenu('none');
-              window.location.assign("#/lingsync/" + $scope.template);
+              window.location.assign("#/spreadsheet/" + $scope.template);
               $scope.loadData();
             } else {
               $scope.changeActiveSubMenu(itemToDisplay);
@@ -228,7 +228,7 @@ define(
         // Fetch data from server and put into template scope
         $scope.loadData = function() {
           $rootScope.loading = true;
-          LingSyncData
+          Data
               .async($rootScope.DB)
               .then(
                   function(dataFromServer) {
@@ -301,7 +301,7 @@ define(
             }
             $rootScope.loading = true;
             $rootScope.server = auth.server;
-            LingSyncData.login(auth.user, auth.password).then(
+            Data.login(auth.user, auth.password).then(
                 function(response) {
                   if (response == undefined) {
                     return;
@@ -357,7 +357,7 @@ define(
           // assign variable until chosen)
           $scope.activeSessionToSwitchTo = activeSessionID;
           $scope.dataentry = true;
-          window.location.assign("#/lingsync/" + $scope.template);
+          window.location.assign("#/spreadsheet/" + $scope.template);
         };
 
         $scope.changeActiveSession = function(activeSessionToSwitchTo) {
@@ -413,7 +413,7 @@ define(
               }
             }
             // Save new session record
-            LingSyncData.saveEditedRecord($rootScope.DB, newSession._id,
+            Data.saveEditedRecord($rootScope.DB, newSession._id,
                 newSession).then(function() {
             });
 
@@ -422,14 +422,14 @@ define(
               $scope.loading = true;
               (function(index) {
                 if (scopeDataToEdit[index].sessionID == newSession._id) {
-                  LingSyncData
+                  Data
                       .async($rootScope.DB, scopeDataToEdit[index].id)
                       .then(
                           function(editedRecord) {
                             // Edit record with updated session info and save
 
                             editedRecord.session = newSession;
-                            LingSyncData.saveEditedRecord($rootScope.DB,
+                            Data.saveEditedRecord($rootScope.DB,
                                 scopeDataToEdit[index].id, editedRecord,
                                 editedRecord._rev).then(function() {
                               $scope.loading = false;
@@ -460,7 +460,7 @@ define(
                   $scope.sessions.splice(i, 1);
                 }
               }
-              LingSyncData
+              Data
                   .removeRecord($rootScope.DB, activeSessionID, revID)
                   .then(
                       function(response) {
@@ -479,7 +479,7 @@ define(
         $scope.createNewSession = function(newSession) {
           $rootScope.loading = true;
           // Get blank template to build new record
-          LingSyncData
+          Data
               .blankSessionTemplate()
               .then(
                   function(newSessionRecord) {
@@ -504,7 +504,7 @@ define(
                         }
                       }
                     }
-                    LingSyncData
+                    Data
                         .saveNew($rootScope.DB, newSessionRecord)
                         .then(
                             function(savedRecord) {
@@ -520,7 +520,7 @@ define(
                               $scope.sessions.push(newSessionRecord);
                               $scope.dataentry = true;
                               $scope.changeActiveSession(savedRecord.data.id);
-                              window.location.assign("#/lingsync/"
+                              window.location.assign("#/spreadsheet/"
                                   + $scope.template);
                             });
                     $rootScope.loading = false;
@@ -542,7 +542,7 @@ define(
           } else {
             var r = confirm("Are you sure you want to delete this record permanently?");
             if (r == true) {
-              LingSyncData
+              Data
                   .removeRecord($rootScope.DB, id, rev)
                   .then(
                       function(response) {
@@ -624,7 +624,7 @@ define(
                   console.log("Saving edited record: " + $scope.data[index].id);
                   var fieldData = $scope.data[index];
                   var docID = fieldData.id;
-                  LingSyncData
+                  Data
                       .async($rootScope.DB, docID)
                       .then(
                           function(editedRecord) {
@@ -647,7 +647,7 @@ define(
 
                             // Save edited record and refresh data
                             // in scope
-                            LingSyncData
+                            Data
                                 .saveEditedRecord($rootScope.DB, docID,
                                     editedRecord)
                                 .then(
@@ -665,7 +665,7 @@ define(
                   console.log("Saving new record.");
 
                   var fieldData = $scope.data[index];
-                  LingSyncData
+                  Data
                       .blankTemplate()
                       .then(
                           function(newRecord) {
@@ -686,7 +686,7 @@ define(
                               newRecord.datumTags = fieldData.datumTags;
                             }
 
-                            LingSyncData
+                            Data
                                 .saveNew($rootScope.DB, newRecord)
                                 .then(
                                     function(response) {
@@ -715,7 +715,7 @@ define(
           } else {
             // TODO FIND BETTER WAY TO KEEP SESSION ALIVE;
             if ($rootScope.userInfo) {
-              LingSyncData.login($rootScope.userInfo.name,
+              Data.login($rootScope.userInfo.name,
                   $rootScope.userInfo.password);
             }
           }
@@ -852,7 +852,7 @@ define(
         };
 
       };
-      LingSyncSpreadsheetController.$inject = [ '$scope', '$rootScope',
-          '$resource', '$filter', 'LingSyncData' ];
-      return LingSyncSpreadsheetController;
+      SpreadsheetStyleDataEntryController.$inject = [ '$scope', '$rootScope',
+          '$resource', '$filter', 'Data' ];
+      return SpreadsheetStyleDataEntryController;
     });

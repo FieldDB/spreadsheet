@@ -1,9 +1,9 @@
-console.log("Loading the LingSyncSpreadsheetFilters.");
+console.log("Loading the SpreadsheetStyleDataEntryFilters.");
 
 'use strict';
 define([ "angular" ], function(angular) {
-  var LingSyncSpreadsheetFilters = angular.module(
-      'LingSyncSpreadsheet.filters', []).filter('startFrom', function() {
+  var SpreadsheetStyleDataEntryFilters = angular.module(
+      'SpreadsheetStyleDataEntry.filters', []).filter('startFrom', function() {
     return function(input, start) {
       if (input == undefined) {
         return;
@@ -46,5 +46,5 @@ define([ "angular" ], function(angular) {
       }
     };
   });
-  return LingSyncSpreadsheetFilters;
+  return SpreadsheetStyleDataEntryFilters;
 });

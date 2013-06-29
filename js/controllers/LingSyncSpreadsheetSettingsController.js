@@ -1,21 +1,21 @@
-console.log("Loading the LingSyncSpreadsheetSettingsController.");
+console.log("Loading the SpreadsheetStyleDataEntrySettingsController.");
 
 'use strict';
 define(
     [ "angular" ],
     function(angular) {
-      var LingSyncSpreadsheetSettingsController = function($scope, $rootScope,
-          $resource, LingSyncData) {
+      var SpreadsheetStyleDataEntrySettingsController = function($scope, $rootScope,
+          $resource, Data) {
 
         $scope.scopePreferences = JSON.parse(localStorage
-            .getItem('LingSyncPreferences'));
+            .getItem('Preferences'));
 
         $scope.availableFields = $scope.scopePreferences.availableFields;
 
         // Get all available datum fields from server
         // var availableFields = {};
         //
-        // LingSyncData
+        // Data
         // .datumFields($rootScope.DB)
         // .then(
         // function(availableDatumFields) {
@@ -75,17 +75,17 @@ define(
         }
 
         $scope.editFieldTitle = function(field, newFieldTitle) {
-          var LingSyncPreferences = JSON.parse(localStorage
-              .getItem('LingSyncPreferences'));
-          for (key in LingSyncPreferences.availableFields) {
+          var Preferences = JSON.parse(localStorage
+              .getItem('Preferences'));
+          for (key in Preferences.availableFields) {
             if (key == field.label) {
-              LingSyncPreferences.availableFields[key].title = newFieldTitle;
+              Preferences.availableFields[key].title = newFieldTitle;
             }
           }
-          localStorage.setItem('LingSyncPreferences', JSON
-              .stringify(LingSyncPreferences));
-          $scope.scopePreferences = LingSyncPreferences;
-          $scope.availableFields = LingSyncPreferences.availableFields;
+          localStorage.setItem('Preferences', JSON
+              .stringify(Preferences));
+          $scope.scopePreferences = Preferences;
+          $scope.availableFields = Preferences.availableFields;
         };
 
         $scope.editTagInfo = function(oldTag, newTag) {
@@ -105,7 +105,7 @@ define(
                 }
                 if (changeThisRecord == true) {
                   $rootScope.loading = true;
-                  LingSyncData
+                  Data
                       .async($rootScope.DB, UUID)
                       .then(
                           function(editedRecord) {
@@ -118,7 +118,7 @@ define(
                               })(k);
                             }
                             // Save edited record
-                            LingSyncData
+                            Data
                                 .saveEditedRecord($rootScope.DB, UUID,
                                     editedRecord, editedRecord._rev)
                                 .then(
@@ -170,7 +170,7 @@ define(
 
         // Get all tags
         $scope.getTags = function() {
-          LingSyncData
+          Data
               .async($rootScope.DB)
               .then(
                   function(dataFromServer) {
@@ -198,36 +198,36 @@ define(
         $scope.getTags();
 
         $scope.saveNewPreferences = function(template, newFieldPreferences) {
-          LingSyncPreferences = JSON.parse(localStorage
-              .getItem('LingSyncPreferences'));
+          Preferences = JSON.parse(localStorage
+              .getItem('Preferences'));
           for (availableField in $scope.availableFields) {
             for (newField in newFieldPreferences) {
               if (newFieldPreferences[newField] == "") {
-                LingSyncPreferences[template][newField].title = "";
-                LingSyncPreferences[template][newField].label = "";
+                Preferences[template][newField].title = "";
+                Preferences[template][newField].label = "";
               } else if ($scope.availableFields[availableField].label == newFieldPreferences[newField]) {
-                LingSyncPreferences[template][newField].title = $scope.availableFields[availableField].title;
-                LingSyncPreferences[template][newField].label = $scope.availableFields[availableField].label;
+                Preferences[template][newField].title = $scope.availableFields[availableField].title;
+                Preferences[template][newField].label = $scope.availableFields[availableField].label;
               }
             }
           }
 
-          LingSyncPreferences.userTemplate = template;
-          $scope.scopePreferences = LingSyncPreferences;
-          $rootScope.template = LingSyncPreferences.userTemplate;
-          $rootScope.fields = LingSyncPreferences[LingSyncPreferences.userTemplate];
-          localStorage.setItem('LingSyncPreferences', JSON
-              .stringify(LingSyncPreferences));
+          Preferences.userTemplate = template;
+          $scope.scopePreferences = Preferences;
+          $rootScope.template = Preferences.userTemplate;
+          $rootScope.fields = Preferences[Preferences.userTemplate];
+          localStorage.setItem('Preferences', JSON
+              .stringify(Preferences));
           window.alert("Settings saved.");
         };
 
         $scope.saveNumberOfRecordsToDisplay = function(numberOfRecordsToDisplay) {
-          LingSyncPreferences = JSON.parse(localStorage
-              .getItem('LingSyncPreferences'));
+          Preferences = JSON.parse(localStorage
+              .getItem('Preferences'));
           if (numberOfRecordsToDisplay) {
-            LingSyncPreferences.resultSize = numberOfRecordsToDisplay;
-            localStorage.setItem('LingSyncPreferences', JSON
-                .stringify(LingSyncPreferences));
+            Preferences.resultSize = numberOfRecordsToDisplay;
+            localStorage.setItem('Preferences', JSON
+                .stringify(Preferences));
             $rootScope.resultSize = numberOfRecordsToDisplay;
             window.alert("Settings saved.");
           } else {
@@ -236,7 +236,7 @@ define(
         };
       };
 
-      LingSyncSpreadsheetSettingsController.$inject = [ '$scope', '$rootScope',
-          '$resource', 'LingSyncData' ];
-      return LingSyncSpreadsheetSettingsController;
+      SpreadsheetStyleDataEntrySettingsController.$inject = [ '$scope', '$rootScope',
+          '$resource', 'Data' ];
+      return SpreadsheetStyleDataEntrySettingsController;
     });

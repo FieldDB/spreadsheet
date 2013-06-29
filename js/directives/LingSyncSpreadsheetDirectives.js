@@ -1,11 +1,12 @@
-console.log("Loading the LingSyncSpreadsheetDirectives.");
+
+console.log("Loading the SpreadsheetStyleDataEntryDirectives.");
 
 'use strict';
 define(
     [ "angular" ],
     function(angular) {
-      var LingSyncSpreadsheetDirectives = angular
-          .module('LingSyncSpreadsheet.directives', [])
+      var SpreadsheetStyleDataEntryDirectives = angular
+          .module('SpreadsheetStyleDataEntry.directives', [])
           .directive('moduleVersion', [ 'version', function(version) {
             return function(scope, element, attrs) {
               element.text(version);
@@ -74,5 +75,5 @@ define(
                 };
               });
 
-      return LingSyncSpreadsheetDirectives;
+      return SpreadsheetStyleDataEntryDirectives;
     });

@@ -1,4 +1,4 @@
-console.log("Loading the LingSync Spreadsheet main");
+console.log("Loading the Spreadsheet main");
 
 // Set the RequireJS configuration
 require.config({
@@ -36,8 +36,8 @@ require.config({
  * will be discovered and loaded as needed by require.js
  */
 require([ "bootstrap", "angular-resource", "../js/module" ],
-		function($, angular, LingSync) {
-	console.log("Initializing the LingSync Spreadsheet page.");
+		function($, angular) {
+	console.log("Initializing the Spreadsheet page.");
 
-	angular.bootstrap(document, [ 'LingSyncSpreadsheet' ]);
+	angular.bootstrap(document, [ 'SpreadsheetStyleDataEntry' ]);
 });

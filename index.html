@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en" ng-csp>
 <head>
-<title>LingSync</title>
+<title>LingSync Spreadsheet Style Data Entry</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -10,25 +10,25 @@
 	href="libs/bootstrap/css/bootstrap.css">
 <link rel="stylesheet" type="text/css"
 	href="libs/bootstrap/css/bootstrap-responsive.css">
-<link rel="stylesheet" type="text/css" href="css/LingSync.css">
+<link rel="stylesheet" type="text/css" href="css/main.css">
 <!-- END Stylesheets -->
 
 </head>
-<body id="app" class="LingSyncBody"
-	ng-controller="LingSyncSpreadsheetController" ng-cloak>
+<body id="app" 
+	ng-controller="SpreadsheetStyleDataEntryController" ng-cloak>
 	<div id="hideOnLoad">
 
 	<div class="menubar mainMenubar" ng-cloak>
 		<span class="menuTitle">|<a
-			ng-click="navigateVerifySaved('home')">LingSync</a>|
+			ng-click="navigateVerifySaved('home')"><i class="icon-home"></i></a>|
 		</span> <span ng-hide="data==undefined"><a
-			href="#/lingsync/{{template}}"
+			href="#/spreadsheet/{{template}}"
 			ng-click="dataentry=true;navigateVerifySaved('none')">Data Entry</a></span>
 		<span ng-hide="dataentry==false"> <a
-			href="#/lingsync/{{template}}"
+			href="#/spreadsheet/{{template}}"
 			ng-click="navigateVerifySaved('searchMenu');">Search</a>
 		</span> <span ng-show="dataentry==true"> <a
-			href="#/lingsync/{{template}}"
+			href="#/spreadsheet/{{template}}"
 			ng-click="navigateVerifySaved('editSession')">Session</a>
 		</span> <span ng-hide="data==undefined"><a
 			ng-click="navigateVerifySaved('settings');">Settings</a></span> <span><a
@@ -180,6 +180,6 @@
 
 	<script src="libs/require.js"></script>
 	<script src="libs/d3.v3.js"></script>
-	<script src="LingSyncSpreadsheet.js"></script>
+	<script src="SpreadsheetStyleDataEntry.js"></script>
 </body>
 </html>
