@@ -12,7 +12,23 @@ define(
                                            * @returns {SpreadsheetStyleDataEntryController}
                                            */
       function($scope, $rootScope, $resource, $filter, Data) {
-        
+       
+        /* Modal controller TODO could move somewhere wher the search is? */
+        $scope.open = function () {
+           $scope.shouldBeOpen = true;
+         };
+
+         $scope.close = function () {
+           $scope.shouldBeOpen = false;
+         };
+
+         $scope.opts = {
+           backdropFade: true,
+           dialogFade:true
+         };
+
+
+
         //TEST FOR CHROME BROWSER
         var is_chrome = window.chrome;
         if (!is_chrome) {
@@ -799,6 +815,7 @@ define(
         };
 
         $scope.exportResults = function() {
+          $scope.open();
           var results = $filter('filter')($scope.data, {
             checked : true
           });

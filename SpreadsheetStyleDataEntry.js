@@ -3,29 +3,21 @@ console.log("Loading the Spreadsheet main");
 // Set the RequireJS configuration
 require.config({
 	paths : {
-		/* Twitter Bootstrap javascript files */
-		"bootstrap" : "libs/bootstrap/js/bootstrap",
-
-		/* jQuery */
-		"jquery" : "libs/jquery",
-
 		/* AngularJS */
 		"angular" : "libs/angular/angular",
-		"angular-resource" : "libs/angular/angular-resource"
+		"angular-resource" : "libs/angular/angular-resource",
+		"bootstrap" : "libs/angular/ui-bootstrap.min"
 	},
 	shim : {
-		"jquery" : {
-			exports : "$"
-		},
-		"bootstrap" : {
-			deps : [ "jquery" ],
-			exports : "$"
-		},
 		"angular" : {
 			exports : "angular"
 		},
 		"angular-resource" : {
 			deps : [ "angular" ],
+			exports : "angular"
+		},
+		"bootstrap" : {
+			deps : [ "angular-resource" ],
 			exports : "angular"
 		}
 	}
@@ -35,8 +27,8 @@ require.config({
  * Declare only the variables that are needed here, the dependencies of the rest
  * will be discovered and loaded as needed by require.js
  */
-require([ "bootstrap", "angular-resource", "js/module.js" ],
-		function($, angular) {
+require(["bootstrap", "js/module.js" ],
+		function(angular) {
 	console.log("Initializing the Spreadsheet page.");
 
 	angular.bootstrap(document, [ 'SpreadsheetStyleDataEntry' ]);

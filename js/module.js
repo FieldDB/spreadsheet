@@ -12,7 +12,7 @@ define([ "angular", "js/controllers/SpreadsheetController", "js/controllers/Sett
 	 */
 
 	var SpreadsheetStyleDataEntry = angular.module('SpreadsheetStyleDataEntry',
-			[ 'SpreadsheetStyleDataEntry.services', 'SpreadsheetStyleDataEntry.directives', 'SpreadsheetStyleDataEntry.filters' ]).config(
+			[ 'SpreadsheetStyleDataEntry.services', 'SpreadsheetStyleDataEntry.directives', 'SpreadsheetStyleDataEntry.filters', 'ui.bootstrap' ]).config(
 			[ '$routeProvider', function($routeProvider) {
 				window.SpreadsheetStyleDataEntryController = SpreadsheetStyleDataEntryController;
 				console.log("Initializing the Spreadsheet module.");
