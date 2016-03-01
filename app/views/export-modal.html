@@ -1,0 +1,40 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{contextualize('locale_search_result_modal')}}</h3>
+    {{contextualize('locale_as')}} <a href="https://wordpress.org/plugins/simple-interlinear-glosses/screenshots/" target="_blank">{{contextualize('locale_wp_gloss')}}</a>: <input type="checkbox" ng-model="useWordpressIGTFormat"/>
+</div>
+<div class="modal-body">
+    <p>
+        {{resultsMessageFromExternalController}}
+    </p>
+
+    <ul ng-show="useWordpressIGTFormat" class="list-unstyled" ng-repeat="result in resultsFromExternalController">
+        <li>
+          [gloss] {{result.utterance}}
+        </li>
+        <li>
+          {{result.morphemes}}
+        </li>
+        <li>
+          {{result.gloss}}
+        </li>
+        <li>
+          [/gloss] {{result.translation}}
+        </li>
+    </ul>
+
+    <ul ng-hide="useWordpressIGTFormat" class="list-unstyled" ng-repeat="result in resultsFromExternalController">
+        <li ng-repeat="corpusField in fieldsInColumns.first">
+          {{result[corpusField.id]}}
+        </li>
+        <li ng-repeat="corpusField in fieldsInColumns.second">
+          {{result[corpusField.id]}}
+        </li>
+        <li ng-repeat="corpusField in fieldsInColumns.third">
+          {{result[corpusField.id]}}
+        </li>
+    </ul>
+    <hr/>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">{{contextualize('locale_close_button')}}</button>
+</div>

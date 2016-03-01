@@ -1,0 +1,28 @@
+<div class="settings_section_header">
+  <h3>{{contextualize('locale_user_interface_settings')}}</h3>
+</div>
+<!-- Number of records to display -->
+<div class="settingsSection">
+  <div class="lead">{{contextualize('locale_records_to_display')}}</div>
+
+  <select ng-model="application.authentication.user.prefs.numVisibleDatum">
+    <option value="5">5</option>
+    <option value="10">10</option>
+    <option value="25" selected>25</option>
+    <option value="50">50</option>
+    <option value="all">
+      {{contextualize('locale_all_dropdown')}}
+    </option>
+  </select>
+</div>
+
+<hr />
+
+<!-- Language of user interface -->
+<form class="settingsSection">
+  <div class="lead">Interface Language</div>
+  <span data-fielddb-locales fielddb-show-locale-key="nativeName" fielddb-full-view="true" class="form-inline">
+  </span>
+</form>
+
+

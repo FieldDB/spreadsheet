@@ -1,0 +1,10 @@
+<div class="modal-header">
+    <h3 class="modal-title">{{contextualize('locale_notification_modal')}}</h3>
+</div>
+<div class="modal-body">
+    {{notificationMessage}}
+</div>
+<div class="modal-footer">
+    <small ng-show="showForgotPasswordInstructions"></small>
+    <button class="btn btn-primary" ng-click="ok()">{{contextualize('locale_OK_button')}}</button>
+</div>

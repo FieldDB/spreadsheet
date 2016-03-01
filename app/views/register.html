@@ -1,0 +1,21 @@
+<div class="mainPageDiv">
+  <form>
+    {{contextualize('locale_server')}}<sup>*</sup>:<br />
+    <select ng-model="application.connection" ng-disabled="loading" ng-options="connection.userFriendlyServerName for connection in application.connections._collection">
+    </select>
+    <br />
+    <font size="1"><i>{{contextualize('locale_data_shared_message')}}</i></font> <br />
+    <input type="text" placeholder="username"
+      ng-model="newLoginInfo.username"><br /> <font size="1"><i>{{contextualize('locale_username_warnig_message')}}</i></font> <br /> <input
+      type="password" placeholder="password"
+      ng-model="newLoginInfo.password"><br /> <input
+      type="password" placeholder="confirm password"
+      ng-model="newLoginInfo.confirmPassword"><br /> <input
+      placeholder="e-mail (optional)" ng-model="newLoginInfo.email" type="email"><br />
+    <button class="btn btn-primary"
+      ng-click="registerNewUser(newLoginInfo)" ng-disabled="loading">
+      {{contextualize('locale_register')}}
+    </button> &nbsp;
+      <img ng-src="images/loading-spinner.gif" class="gravatar-small" ng-show="application.authentication.loading" />
+  </form>
+</div>
