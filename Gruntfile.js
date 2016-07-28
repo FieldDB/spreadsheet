@@ -396,7 +396,7 @@ module.exports = function(grunt) {
     compress: {
       dist: {
         options: {
-          archive: '../../../../Releases/spreadsheet_app_v<%= yeoman.version + new Date()%>.zip'
+          archive: '../Releases/spreadsheet_app_v<%= yeoman.version + new Date()%>.zip'
         },
         files: [{
           expand: true,

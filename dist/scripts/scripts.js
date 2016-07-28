@@ -399,12 +399,12 @@ angular.module('spreadsheetApp')
     var servers = {};
 
     if (localhost) {
-      // servers.localhost = {
-      //   auth: "https://localhost:3183",
-      //   corpus: "https://localhost:6984",
-      //   serverCode: "localhost",
-      //   userFriendlyServerName: "Localhost"
-      // };
+      servers.localhost = {
+        auth: "https://localhost:3183",
+        corpus: "https://localhost:6984",
+        serverCode: "localhost",
+        userFriendlyServerName: "Localhost"
+      };
     }
 
     servers.production = {
@@ -1599,7 +1599,7 @@ var SpreadsheetStyleDataEntryController = function($scope, $rootScope, $resource
     }
   }
 
-  $rootScope.appVersion = "3.45.29.23.42ss";
+  $rootScope.appVersion = "4.13.27.23.38ss";
 
   // Functions to open/close generic notification modal
   $rootScope.openNotification = function(size, showForgotPasswordInstructions) {
@@ -2291,7 +2291,7 @@ var SpreadsheetStyleDataEntryController = function($scope, $rootScope, $resource
         $scope.updatePermissionsForCurrentCorpus();
         var scopeData = [];
         for (var i = 0; i < dataFromServer.length; i++) {
-          if (dataFromServer[i].value.datumFields && dataFromServer[i].value.session) {
+          if ((dataFromServer[i].value.fields || dataFromServer[i].value.datumFields) && dataFromServer[i].value.session) {
             var newDatumFromServer = SpreadsheetDatum.convertFieldDBDatumIntoSpreadSheetDatum({}, dataFromServer[i].value, $rootScope.server + "/" + $rootScope.corpus.dbname + "/", $scope);
 
             // Load data from current session into scope

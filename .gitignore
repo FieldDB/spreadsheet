@@ -4,3 +4,4 @@ dist
 .sass-cache
 bower_components
 app/scripts/templates.js
+private_services.js

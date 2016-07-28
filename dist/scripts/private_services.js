@@ -17,12 +17,12 @@ angular.module('spreadsheetApp')
     var servers = {};
 
     if (localhost) {
-      // servers.localhost = {
-      //   auth: "https://localhost:3183",
-      //   corpus: "https://localhost:6984",
-      //   serverCode: "localhost",
-      //   userFriendlyServerName: "Localhost"
-      // };
+      servers.localhost = {
+        auth: "https://localhost:3183",
+        corpus: "https://localhost:6984",
+        serverCode: "localhost",
+        userFriendlyServerName: "Localhost"
+      };
     }
 
     servers.production = {
